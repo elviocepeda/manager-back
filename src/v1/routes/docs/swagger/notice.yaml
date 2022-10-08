@@ -1,0 +1,157 @@
+"/api/v1/notice":
+  post:
+    tags:
+      - Notice
+    summary: Create a new notice
+    description: with this service you can create a new notice like a congratulations, events, adds etc
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/noticeFields"
+    responses:
+      200:
+        description: A successful response
+  get:
+    tags:
+      - Notice
+    summary: Get all notices
+    description: with this service you can get all notices lika a congratulations, events, adds etc
+    responses:
+      200:
+        description: A successful response
+        content:
+         aplication/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/noticeFields"
+"/api/v1/notice/{uuid}":
+  get:
+    tags:
+      - Notice
+    summary: Get one notice
+    description: with this service you can get one notice lika a congratulations, events, adds etc
+    parameters:
+      - $ref: "#/components/parameters/IdQuery"
+    responses:
+      200:
+        description: A successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "#/components/schemas/noticeFields"
+  patch:
+    tags:
+      - Notice
+    summary: Edit notice
+    description: with this service you can edit notice like a congratulations, events, adds etc
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/noticeFields"
+    responses:
+      200:
+        description: A successful response
+  delete:
+    tags:
+      - Notice
+    summary: delete notice
+    description: with this service you can delete notice like a congratulations, events, adds etc
+    parameters:
+      - $ref: "#/components/parameters/IdQuery"
+    responses:
+      200:
+        description: A successful response
+"/api/v1/notice/types":
+  get:
+    tags:
+      - Notice
+    summary: Get all types of notices
+    description: with this service you can get all notices types
+    responses:
+      200:
+        description: A successful response
+        content:
+         aplication/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/typeOfNoticeFields"
+components:
+  schemas:
+    noticeFields:
+      description: all create notice fields
+      type: object
+      properties:
+        message:
+          description: added message
+          type: string
+          example: "Mañana es dia libre señores!!!"
+        image:
+          description: added image
+          type: string
+          format: file
+    Celebration:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: "Celebracion"
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 2
+        name:
+          type: string
+          example: "Evento"
+    Climate:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 3
+        name:
+          type: string
+          example: "Clima"
+    Another:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 4
+        name:
+          type: string
+          example: "Otro"
+    typeOfNoticeFields:
+      properties:
+        0:
+          $ref: '#/components/schemas/Celebration'
+        1:
+          $ref: '#/components/schemas/Event'
+        2:
+          $ref: '#/components/schemas/Climate'
+        3:
+          $ref: '#/components/schemas/Another'
+
+
+
+
+
+
+
+
+
+
+
+
+

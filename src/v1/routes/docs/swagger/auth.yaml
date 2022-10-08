@@ -1,0 +1,113 @@
+"/api/v1/auth/login":
+  post:
+    tags:
+      - Auth
+    summary: Send data for login.
+    description: with this service you can log in your session in the intranet
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/Login"
+    responses:
+      200:
+        description: A successful response
+"/api/v1/auth/logout":
+  get:
+    tags:
+      - Auth
+    summary: Get token
+    description: with this service you get token for persist the session
+    parameters:
+      - $ref: "#/components/parameters/UserTokenQuery"
+    responses:
+      200:
+        description: A successful response
+        content:
+            aplication/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/RefreshTokenFields"
+"/api/v1/auth/roles":
+  get:
+    tags:
+      - Auth
+    summary: Get all roles
+    description: with this service you get the roles
+    responses:
+      200:
+        description: A successful response
+        content:
+            aplication/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AllRolesFields"
+components:
+  schemas:
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+      example:
+        email: luis@gmail.com
+        password: luis
+    RefreshTokenFields:
+     type: object
+     properties:
+      status:
+        type: boolean
+    Developer:
+     type: object
+     properties:
+      id:
+        type: string
+        example: 1
+      name:
+        type: string
+        example: Desarrollador
+    Finance:
+     type: object
+     properties:
+      id:
+        type: string
+        example: 2
+      name:
+        type: string
+        example: Finanzas
+    Rh:
+     type: object
+     properties:
+      id:
+        type: string
+        example: 3
+      name:
+        type: string
+        example: Rh
+    Admin:
+     type: object
+     properties:
+      id:
+        type: string
+        example: 3
+      name:
+        type: string
+        example: Admin
+    AllRolesFields:
+     properties:
+      0:
+       $ref: "#/components/schemas/Developer"
+      1:
+       $ref: "#/components/schemas/Finance"
+      2:
+       $ref: "#/components/schemas/Rh"
+      3:
+       $ref: "#/components/schemas/Admin"

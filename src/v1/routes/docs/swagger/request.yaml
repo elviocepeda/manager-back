@@ -1,0 +1,103 @@
+"/api/v1/req/new":
+  post:
+    tags:
+      - Request
+    summary: Create new request
+    description: With this service you can create a new request like a vacations, payments, complaints etc
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/Request"
+    responses:
+      200:
+        description: A successful response
+"/api/v1/req/types":
+  get:
+    tags:
+      - Request
+    summary: get type of request
+    description: With this service you can get one list with the type of request
+    responses:
+      200:
+        description: A successful response
+        content:
+         aplication/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/typeOfRequestFields"
+components:
+  schemas:
+    Request:
+      type: object
+      properties:
+        typeOfRequest:
+          description: added typeOfRequest
+          type: string
+          example: vacations
+        info:
+          description: added info
+          type: string
+          example: I need vacations xD
+        userId:
+          description: added userId
+          type: string
+          example: 6321021ae7ed2e98fe7aecc4
+      required:
+        - typeOfRequest
+        - userId
+    Event:
+      type: object
+      properties:
+         id:
+           type: string
+           example: 1
+         name:
+           type: string
+           example: Evento
+    New:
+      type: object
+      properties:
+        id:
+           type: string
+           example: 2
+        name:
+           type: string
+           example: Noticia
+    Congratulations:
+      type: object
+      properties:
+        id:
+           type: string
+           example: 3
+        name:
+           type: string
+           example: Felicitaciones
+    typeOfRequestFields:
+      properties:
+        0:
+          $ref: '#/components/schemas/Event'
+        1:
+          $ref: '#/components/schemas/New'
+        2:
+          $ref: '#/components/schemas/Congratulations'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

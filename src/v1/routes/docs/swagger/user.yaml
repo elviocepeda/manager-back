@@ -1,0 +1,286 @@
+"/api/v1/users":
+  post:
+    tags:
+      - User
+    summary: Create a new user
+    description: with this service you can create a new user, if have email asigned
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/createUserFields"
+    responses:
+      200:
+        description: A successful response
+  get:
+    tags:
+      - User
+    summary: Get all users
+    description: with this service you can get, for each user, the name, last name, user name, email, birthday, phone, and department
+    responses:
+      200:
+        description: A successful response
+        content:
+            aplication/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/allUsersFields"
+"/api/v1/users/{uuid}":
+  get:
+    tags:
+      - User
+    summary: Returns a user by uuid.
+    description: with this service you can get data for the one user
+    parameters:
+      - $ref: "#/components/parameters/UserIdQuery"
+      - $ref: "#/components/parameters/IdQuery"
+    responses:
+      200:
+        description: A successful response
+        content:
+            aplication/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/allUsersFields"
+  patch:
+    tags:
+      - User
+    summary: Update user
+    description: with this service you can update data for the one user
+    parameters:
+      - $ref: "#/components/parameters/UserIdQuery"
+      - $ref: "#/components/parameters/IdQuery"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/updateUserFields"
+    responses:
+      200:
+        description: A successful response
+  delete:
+    tags:
+      - User
+    summary: delete user by ID
+    description: with this service you can delete one user
+    parameters:
+      - $ref: "#/components/parameters/UserIdQuery"
+      - $ref: "#/components/parameters/IdQuery"
+    responses:
+      200:
+        description: A successful response
+"/api/v1/users/set-password":
+  post:
+    tags:
+      - User
+    summary: set password
+    description: with this service you can set your password for the one user
+    parameters:
+      - id: userId
+        in: userId
+        required: true
+      - token: token
+        in: token
+        required: true
+      - $ref: "#/components/parameters/IdQuery"
+      - $ref: "#/components/parameters/UserTokenQuery"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/createPasswordFields"
+    responses:
+      200:
+        description: A successful response
+"/api/v1/users/forgot-password":
+  post:
+    tags:
+      - User
+    summary: Create a new password when is forgot
+    description: with this service you can create a new password only if the user forgot
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/forgotPasswordFields"
+    responses:
+      200:
+        description: A successful response
+"/api/v1/users/set-avatar/{uuid}":
+  post:
+    tags:
+      - User
+    summary: upload image user
+    description: with this service you can upload image for the one user
+    parameters:
+      - $ref: "#/components/parameters/UserIdQuery"
+      - $ref: "#/components/parameters/IdQuery"
+    requestBody:
+      content:
+        image/png:
+          schema:
+            type: string
+            format: binary
+    responses:
+      200:
+        description: A successful response
+components:
+  schemas:
+    createUserFields:
+      description: all create user fields
+      type: object
+      properties:
+        email:
+          description: added email
+          type: string
+          example: urbano54@gmailcom
+        role:
+          description: added role
+          type: string
+          example: "4"
+        createdAt:
+          description: added createdAt
+          type: string
+          format: date
+          example: "21/09/22"
+    createPasswordFields:
+      description: all create password fields
+      type: object
+      properties:
+        password:
+          description: added password
+          type: string
+          example: luis554
+        confirmPassword:
+          description: added confirmPassword
+          type: string
+          example: luis554
+    forgotPasswordFields:
+      description: all forgot password fields
+      type: object
+      properties:
+        email:
+          description: added email
+          type: string
+          example: luis554
+    updateUserFields:
+      description: all update user fields
+      type: object
+      properties:
+        email:
+          description: added email
+          type: string
+          example: urbano54@gmailcom
+        name:
+          description: added name
+          type: string
+          example: Luis
+        surname:
+          description: added surname
+          type: string
+          example: Urbano
+        lastEdit:
+          description: added lastEdit
+          type: string
+          format: date
+          example: Sep 21st 22
+    allUsersFields:
+      description: all update user fields
+      type: object
+      properties:
+        birthDate:
+          description: added birthDate
+          type: string
+          format: date
+          example: 03-02-2000
+        department:
+          description: added department
+          type: string
+          example: development
+        email:
+          description: added email
+          type: string
+          example: Urbano54@gmail.com
+        lastName:
+          description: added lastName
+          type: string
+          example: Urbano
+        name:
+          description: added name
+          type: string
+          example: Luis
+        phone:
+          description: added phone
+          type: integer
+          example: 04146654332
+        position:
+          description: added position
+          type: string
+          example: junior dev
+        uuid:
+          description: added uuid
+          type: string
+          example: d5fc92c7-70b1-4d80-8c3a-5c906ee408c8
+  parameters:
+    UserIdQuery:
+      in: userId
+      name: userId
+    IdQuery:
+      in: Id
+      name: Id
+      required: true
+    UserTokenQuery:
+      in: token
+      name: token
+      required: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

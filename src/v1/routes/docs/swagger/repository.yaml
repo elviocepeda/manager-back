@@ -1,0 +1,81 @@
+"/api/v1/repo":
+  post:
+    tags:
+      - Repository
+    summary: Create a new document
+    description: with this service you can create a new document like a excel, pdf, word etc
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            $ref: "#/components/schemas/repositoryOfKnowledgeFields"
+    responses:
+      200:
+        description: A successful response
+  get:
+    tags:
+      - Repository
+    summary: Get all documents
+    description: with this service you can get all Documents like a excel, pdf, word etc
+    responses:
+      200:
+        description: A successful response
+        content:
+          application/json:
+            schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/repositoryOfKnowledgeFields"
+"/api/v1/repo/{id}":
+  get:
+    tags:
+      - Repository
+    summary: Get one document
+    description: with this service you can get one document like a excel, pdf, word etc
+    parameters:
+      - $ref: "#/components/parameters/IdQuery"
+    responses:
+      200:
+        description: A successful response
+        content:
+          application/json:
+            schema:
+                  type: object
+                  $ref: "#/components/schemas/repositoryOfKnowledgeFields"
+  patch:
+    tags:
+      - Repository
+    summary: Update document
+    description: with this service you can update document like a excel, pdf, word etc
+    parameters:
+      - $ref: "#/components/parameters/IdQuery"
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            $ref: "#/components/schemas/repositoryOfKnowledgeFields"
+    responses:
+      200:
+        description: A successful response
+  delete:
+    tags:
+      - Repository
+    summary: delete document
+    description: with this service you can delete document like a excel, pdf, word etc
+    parameters:
+      - $ref: "#/components/parameters/IdQuery"
+    responses:
+      200:
+        description: A successful response
+components:
+  schemas:
+    repositoryOfKnowledgeFields:
+      description: all repository of knowledge fields
+      type: object
+      properties:
+        fileName:
+          description: added fileName
+          type: string
+          format: binary
